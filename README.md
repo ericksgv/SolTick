@@ -1,4 +1,4 @@
-# prueba
+# SolTick
 
 This project is generated with the [create-solana-dapp](https://github.com/solana-developers/create-solana-dapp) generator.
 
@@ -24,7 +24,7 @@ cd <repo-name>
 #### Install Dependencies
 
 ```shell
-npm run install
+pnpm run install
 ```
 
 #### Start the web app
@@ -41,7 +41,7 @@ This is a Solana program written in Rust using the Anchor framework.
 
 #### Commands
 
-You can use any normal anchor commands. Either move to the `anchor` directory and run the `anchor` command or prefix the command with `npm run`, eg: `npm run anchor`.
+You can use any normal anchor commands. Either move to the `anchor` directory and run the `anchor` command or prefix the command with `pnpm run`, eg: `pnpm run anchor`.
 
 #### Sync the program id:
 
@@ -50,31 +50,31 @@ Running this command will create a new keypair in the `anchor/target/deploy` dir
 You will manually need to update the constant in `anchor/lib/counter-exports.ts` to match the new program id.
 
 ```shell
-npm run anchor keys sync
+pnpm run anchor keys sync
 ```
 
 #### Build the program:
 
 ```shell
-npm run anchor-build
+pnpm run anchor-build
 ```
 
 #### Start the test validator with the program deployed:
 
 ```shell
-npm run anchor-localnet
+pnpm run anchor-localnet
 ```
 
 #### Run the tests
 
 ```shell
-npm run anchor-test
+pnpm run anchor-test
 ```
 
 #### Deploy to Devnet
 
 ```shell
-npm run anchor deploy --provider.cluster devnet
+pnpm run anchor deploy --provider.cluster devnet
 ```
 
 ### web
@@ -86,11 +86,11 @@ This is a React app that uses the Anchor generated client to interact with the S
 Start the web app
 
 ```shell
-npm run dev
+pnpm run dev
 ```
 
 Build the web app
 
 ```shell
-npm run build
+pnpm run build
 ```
