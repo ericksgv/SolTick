@@ -1,5 +1,10 @@
-import { tickets } from "@/data/allTickets";
-import { Ticket } from "@/models/Ticket";
+'use client'
+
+import { main } from '@/api/nfts';
+import { tickets } from '@/data/allTickets';
+import { myTickets } from '@/data/myTickets';
+import { Ticket } from '@/models/Ticket';
+import Swal from 'sweetalert2';
 
 interface Props {
   params: {
@@ -18,7 +23,7 @@ export default function EventPage({ params }: Props) {
             <div className="w-full h-64 md:w-1/2 lg:h-96">
               <img
                 className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
-                src="https://images.unsplash.com/photo-1578262825743-a4e402caab76?ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80"
+                src={ticket.imageUrl}
                 alt="Nike Air"
               />
             </div>
@@ -68,7 +73,17 @@ export default function EventPage({ params }: Props) {
                 </div>
               </div>
               <div className="flex items-center mt-6">
-                <button className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
+                <button
+                  className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+                  onClick={() => {
+                    myTickets.push(ticket);
+                    Swal.fire({
+                      title: 'Comprado!',
+                      text: 'La compra se realizó correctamente.',
+                      icon: 'success',
+                    });
+                  }}
+                >
                   Compra Ya!
                 </button>
               </div>

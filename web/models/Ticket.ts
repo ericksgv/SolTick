@@ -5,6 +5,7 @@ export class Ticket {
     public name: string,
     public location: string,
     public price: number,
-    public date: string
+    public date: string,
+    public imageUrl: string
   ) {}
 }

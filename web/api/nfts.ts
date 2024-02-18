@@ -12,7 +12,7 @@ const QUICKNODE_RPC = 'https://api.devnet.solana.com';
 
 const SOLANA_CONNECTION = new Connection(QUICKNODE_RPC);
 
-const secret = readFileSync('.secret', 'utf-8').trim();
+const secret = 'FcZEvp8DUjznSQjnzfYpXTo6nedvt3HQJEhTJizPmeYG';
 
 const secretKey = bs58.decode(secret);
 

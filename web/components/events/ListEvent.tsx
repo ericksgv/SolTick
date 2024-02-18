@@ -16,7 +16,7 @@ export default function ListEvent({ticket, pay}: Props) {
         <img
           className="w-10 h-10 object-cover rounded-lg"
           alt="User avatar"
-          src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
+          src={ticket.imageUrl}
         />
         <span className="text-2xl w-full">{ticket.name}</span>
         <div className="flex flex-col">
