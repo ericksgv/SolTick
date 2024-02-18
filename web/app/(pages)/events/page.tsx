@@ -1,5 +1,6 @@
 'use client';
 
+import { main } from '@/api/nfts';
 import ListEvent from '@/components/events/ListEvent';
 import { tickets } from '@/data/allTickets';
 import { myTickets } from '@/data/myTickets';
@@ -40,6 +41,7 @@ export default function CategoriesPage() {
                 key={ticket.id}
                 ticket={ticket}
                 pay={() => {
+                  main(ticket)
                   myTickets.push(ticket);
                   Swal.fire({
                     title: 'Comprado!',

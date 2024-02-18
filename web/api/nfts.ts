@@ -1,36 +1,23 @@
 import { Connection, Keypair } from '@solana/web3.js';
-import {
-  Metaplex,
-  keypairIdentity,
-  bundlrStorage,
-  toMetaplexFile,
-} from '@metaplex-foundation/js';
-import { readFileSync } from 'fs';
+import { Metaplex, keypairIdentity, toMetaplexFile } from '@metaplex-foundation/js'; // Corrección en la importación
 import bs58 from 'bs58';
+import { Ticket } from '@/models/Ticket';
+import fetch from 'isomorphic-fetch';
 
 const QUICKNODE_RPC = 'https://api.devnet.solana.com';
 
 const SOLANA_CONNECTION = new Connection(QUICKNODE_RPC);
 
-const secret = 'FcZEvp8DUjznSQjnzfYpXTo6nedvt3HQJEhTJizPmeYG';
-
+const secret = ''; // Define tu clave secreta aquí
 const secretKey = bs58.decode(secret);
 
 const WALLET = Keypair.fromSecretKey(secretKey);
 
 const METAPLEX = Metaplex.make(SOLANA_CONNECTION)
-  .use(keypairIdentity(WALLET))
-  .use(
-    bundlrStorage({
-      address: 'https://devnet.bundlr.network',
-      providerUrl: QUICKNODE_RPC,
-      timeout: 60000,
-    })
-  );
+  .use(keypairIdentity(WALLET));
 
 const CONFIG = {
-  uploadPath: 'uploads/',
-  imgFileName: 'quickNodeNFT.jpg',
+  imgFileName: "https://cdn.pixabay.com/photo/2015/11/22/19/04/crowd-1056764_640.jpg",
   imgType: 'image/jpg',
   imgName: 'QuickNode art',
   description: 'QuickNode is a work of art!',
@@ -39,21 +26,15 @@ const CONFIG = {
     { trait_type: 'Type', value: 'Bstract' },
     { trait_type: 'Background', value: 'Blue' },
   ],
-  sellerFeeBasisPoints: 500, //500 bp = 5%
+  sellerFeeBasisPoints: 500, // 500 bp = 5%
   symbol: 'QNA',
   creators: [{ address: WALLET.publicKey, share: 100 }],
 };
 
-//main();
+export async function main(ticket: Ticket) {
+  console.log(`Minting ${ticket.name} to an NFT in Wallet ${WALLET.publicKey.toBase58()}.`);
 
-export async function main() {
-  console.log(
-    `Minting ${
-      CONFIG.imgName
-    } to an NFT in Wallet ${WALLET.publicKey.toBase58()}.`
-  );
-
-  const imgUri = await uploadImage(CONFIG.uploadPath, CONFIG.imgFileName);
+  const imgUri = await uploadImage(ticket.imageUrl, ticket.name);
 
   const metadataUri = await uploadMetadata(
     imgUri,
@@ -63,7 +44,7 @@ export async function main() {
     CONFIG.attributes
   );
 
-  mintNft(
+  await mintNft(
     metadataUri,
     CONFIG.imgName,
     CONFIG.sellerFeeBasisPoints,
@@ -72,24 +53,29 @@ export async function main() {
   );
 }
 
-async function uploadImage(filePath, fileName) {
+async function uploadImage(imageUrl: string, fileName: string) {
   console.log(`Step 1 - Uploading Image`);
-  const imgBuffer = readFileSync(filePath + fileName);
+  const imgBuffer = await (await fetch(imageUrl)).arrayBuffer();
   const imgMetaplexFile = toMetaplexFile(imgBuffer, fileName);
   const imgUri = await METAPLEX.storage().upload(imgMetaplexFile);
   console.log(`   Image URI:`, imgUri);
   return imgUri;
 }
 
+
+
+
+
+
 async function uploadMetadata(
-  imgUri,
-  imgType,
-  nftName,
-  description,
-  attributes
+  imgUri: string,
+  imgType: string,
+  nftName: string,
+  description: string,
+  attributes: { trait_type: string, value: string }[]
 ) {
   console.log('Step 2 - Uploading Metadata');
-  const { uri } = await METAPLEX.nfts().uploadMetadata({
+  const metadata = {
     name: nftName,
     description,
     image: imgUri,
@@ -102,12 +88,19 @@ async function uploadMetadata(
         },
       ],
     },
-  });
+  };
+  const { uri } = await METAPLEX.nfts().uploadMetadata(metadata);
   console.log('   Metadata URI:', uri);
   return uri;
 }
 
-async function mintNft(metadataUri, name, sellerFee, symbol, creators) {
+async function mintNft(
+  metadataUri: string,
+  name: string,
+  sellerFee: number,
+  symbol: string,
+  creators: { address: string, share: number }[]
+) {
   console.log('Step 3 - Minting NFT');
 
   const { nft } = await METAPLEX.nfts().create(
@@ -122,8 +115,6 @@ async function mintNft(metadataUri, name, sellerFee, symbol, creators) {
     { commitment: 'finalized' }
   );
 
-  console.log('   Success!🎉');
-  console.log(
-    `   Minted NFT: https://explorer.solana.com/address/${nft.address}?cluster=devnet`
-  );
+  console.log('Success! 🎉');
+  console.log('Minted NFT: https://explorer.solana.com/address/${nft.address}?cluster=devnet');
 }
