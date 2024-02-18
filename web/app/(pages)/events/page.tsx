@@ -30,8 +30,8 @@ export default function CategoriesPage() {
               </span>
             </div>
 
-            <ListEvent eventDate="24/05/2024" eventName="Festival Estereo Picnic" eventPrice={3.4} />
-            <ListEvent eventDate="04/02/2026" eventName="Final Copa América" eventPrice={2.6} />
+            <ListEvent eventDate="24/05/2024" eventName="Festival Estereo Picnic" eventPrice={3.4} link="/event/1" pay={() => {}} />
+            <ListEvent eventDate="04/02/2026" eventName="Final Copa América" eventPrice={2.6} link="/event/2" pay={() => {}} />
           </div>
         </div>
       </div>

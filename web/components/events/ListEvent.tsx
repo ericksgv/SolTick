@@ -1,13 +1,17 @@
+import Link from "next/link";
+
 interface Props {
   eventName: string;
   eventDate: string;
   eventPrice: number;
+  link: string;
+  pay: () => void;
 }
 
-export default function ListEvent({eventName, eventDate, eventPrice}: Props) {
+export default function ListEvent({eventName, eventDate, eventPrice, link, pay}: Props) {
   return (
     <div className="flex border-b py-3 cursor-pointer hover:shadow-md px-2 border-slate-800 gap-4 items-center">
-      <a className="flex items-center gap-4 w-full" href="/">
+      <Link className="flex items-center gap-4 w-full" href={link}>
         <img
           className="w-10 h-10 object-cover rounded-lg"
           alt="User avatar"
@@ -22,8 +26,8 @@ export default function ListEvent({eventName, eventDate, eventPrice}: Props) {
             {eventDate}
           </span>
         </div>
-      </a>
-      <a
+      </Link>
+      <Link
         href="/my_tickets"
         className="flex focus:outline-none aspect-square w-16 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 justify-center items-center"
       >
@@ -54,7 +58,7 @@ export default function ListEvent({eventName, eventDate, eventPrice}: Props) {
             />
           </g>
         </svg>
-      </a>
+      </Link>
     </div>
   );
 }
