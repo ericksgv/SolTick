@@ -1,4 +1,14 @@
 # SolTick
+La inspiración detrás de SolTick surge de la necesidad de combatir fraudes en la venta de boletos y brindar transparencia al mercado. Utilizando la tecnología blockchain, cada boleto se tokeniza como un NFT, asegurando su autenticidad y evitando prácticas fraudulentas. La plataforma conecta a promotores, artistas, usuarios y revendedores en un ecosistema seguro. Además, la inclusión de royalties en cada transacción NFT beneficia a los creadores y añade un componente exclusivo mediante el diseño gráfico único de cada boleto, que permite a los usuarios venderlos a coleccionistas o conservarlos como recuerdo.
+
+## Logo
+![SolTickLogo](https://github.com/ericksgv/SolTick/assets/103967100/687d58a4-748f-4112-a8bc-c02ed1437738)
+
+## Diagrama de la solución:
+
+![DiagramaDeSolución](https://github.com/ericksgv/SolTick/assets/103967100/ac5ca8e4-6656-4a18-9dff-93eb08f2ca18)
+
+SolTick revoluciona la venta de boletos utilizando tecnología blockchain y NFTs, asegurando autenticidad y eliminando fraudes. Conectamos promotores, artistas y usuarios en un mercado transparente. Los NFT generan regalías y ofrecen arte exclusivo a los fanáticos después del evento.
 
 This project is generated with the [create-solana-dapp](https://github.com/solana-developers/create-solana-dapp) generator.
 
