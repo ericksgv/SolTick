@@ -1,3 +1,6 @@
+'use client'
+
+import { myTickets } from "@/data/myTickets";
 import { Ticket } from "@/models/Ticket";
 import Link from "next/link";
 
@@ -25,9 +28,10 @@ export default function ListEvent({ticket, pay}: Props) {
           </span>
         </div>
       </Link>
-      <Link
-        href="/my_tickets"
+      <button
         className="flex focus:outline-none aspect-square w-16 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 justify-center items-center"
+        disabled={myTickets.includes(ticket)}
+        onClick={pay}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +60,7 @@ export default function ListEvent({ticket, pay}: Props) {
             />
           </g>
         </svg>
-      </Link>
+      </button>
     </div>
   );
 }

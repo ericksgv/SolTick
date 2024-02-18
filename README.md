@@ -30,7 +30,7 @@ pnpm run install
 #### Start the web app
 
 ```
-npm run dev
+pnpm run dev
 ```
 
 ## Apps

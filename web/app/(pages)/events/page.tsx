@@ -1,5 +1,9 @@
+'use client';
+
 import ListEvent from '@/components/events/ListEvent';
 import { tickets } from '@/data/allTickets';
+import { myTickets } from '@/data/myTickets';
+import Swal from 'sweetalert2';
 
 export default function CategoriesPage() {
   return (
@@ -32,7 +36,18 @@ export default function CategoriesPage() {
             </div>
 
             {tickets.map((ticket) => (
-              <ListEvent key={ticket.id} ticket={ticket} pay={() => {}} />
+              <ListEvent
+                key={ticket.id}
+                ticket={ticket}
+                pay={() => {
+                  myTickets.push(ticket);
+                  Swal.fire({
+                    title: 'Comprado!',
+                    text: 'La compra se realizó correctamente.',
+                    icon: 'success',
+                  });
+                }}
+              />
             ))}
           </div>
         </div>
