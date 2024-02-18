@@ -1,4 +1,5 @@
-import ListEvent from "@/components/events/ListEvent"
+import ListEvent from '@/components/events/ListEvent';
+import { tickets } from '@/data/allTickets';
 
 export default function CategoriesPage() {
   return (
@@ -30,8 +31,9 @@ export default function CategoriesPage() {
               </span>
             </div>
 
-            <ListEvent eventDate="24/05/2024" eventName="Festival Estereo Picnic" eventPrice={3.4} link="/event/1" pay={() => {}} />
-            <ListEvent eventDate="04/02/2026" eventName="Final Copa América" eventPrice={2.6} link="/event/2" pay={() => {}} />
+            {tickets.map((ticket) => (
+              <ListEvent key={ticket.id} ticket={ticket} pay={() => {}} />
+            ))}
           </div>
         </div>
       </div>

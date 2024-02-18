@@ -1,19 +1,14 @@
 'use client';
 
-import Ticket from '@/components/events/Ticket';
+import TicketComponent from '@/components/events/TicketComponent';
 import TicketContent from '@/components/events/TicketContent';
+import { nullTicket } from '@/data/allTickets';
+import { myTickets } from '@/data/myTickets';
+import { Ticket } from '@/models/Ticket';
 import { useEffect, useState } from 'react';
 
-const tickets = [
-  { id: '0304', name: 'Festival Estereo Picnic', location: 'Parque Simón Bolivar', price: 3.2, date: '2023-07-01' },
-  { id: '9025', name: 'Final Copa América', location: 'Campín', price: 1.5, date: '2023-07-01'},
-  { id: '4759', name: 'Festival Cordillera', location: 'Parque Simón Bolivar', price: 2.0, date: '2023-07-01'},
-  { id: '1126', name: 'Carlos Vives', location: 'Movistar Arena', price: 4.5, date: '2023-07-01'},
-  { id: '0433', name: 'La pelota de letras', location: 'Teatro Patria', price: 1.0, date: '2023-07-01'},
-];
-
-function getTicketById(id: string): { id: string; name: string, location: string, price: number, date: string } {
-  return tickets.find((ticket) => ticket.id === id)!;
+function getTicketById(id: string): Ticket {
+  return myTickets.find((ticket) => ticket.id === id) || nullTicket;
 }
 
 export default function MyTicketsPage() {
@@ -30,8 +25,8 @@ export default function MyTicketsPage() {
 
   return (
     <div className="grid grid-cols-4 items-center gap-4 my-8 w-2/3 mx-auto">
-      {tickets.map((ticket) => (
-        <Ticket
+      {myTickets.map((ticket) => (
+        <TicketComponent
           key={ticket.id}
           id={ticket.id}
           name={ticket.name}
@@ -63,7 +58,7 @@ export default function MyTicketsPage() {
             />
           </svg>
         </button>
-        <TicketContent {...getTicketById(selectedTicket)} />
+        <TicketContent ticket={getTicketById(selectedTicket)} />
       </div>
     </div>
   );

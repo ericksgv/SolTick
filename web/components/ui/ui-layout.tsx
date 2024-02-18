@@ -54,7 +54,7 @@ export function UiLayout({ children }: { children: ReactNode }) {
       <ClusterChecker>
         <AccountChecker />
       </ClusterChecker>
-      <div className="relative flex-grow overflow-hidden">
+      <div className="relative flex-grow overflow-x-hidden">
         <Suspense
           fallback={
             <div className="text-center my-32">
@@ -76,7 +76,7 @@ export function UiLayout({ children }: { children: ReactNode }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              create-solana-dapp
+              SolTick SAS
             </a>
           </p>
         </aside>

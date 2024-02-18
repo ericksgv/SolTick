@@ -1,29 +1,27 @@
+import { Ticket } from "@/models/Ticket";
 import Link from "next/link";
 
 interface Props {
-  eventName: string;
-  eventDate: string;
-  eventPrice: number;
-  link: string;
+  ticket: Ticket;
   pay: () => void;
 }
 
-export default function ListEvent({eventName, eventDate, eventPrice, link, pay}: Props) {
+export default function ListEvent({ticket, pay}: Props) {
   return (
     <div className="flex border-b py-3 cursor-pointer hover:shadow-md px-2 border-slate-800 gap-4 items-center">
-      <Link className="flex items-center gap-4 w-full" href={link}>
+      <Link className="flex items-center gap-4 w-full" href={`/event/${ticket.id}`}>
         <img
           className="w-10 h-10 object-cover rounded-lg"
           alt="User avatar"
           src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
         />
-        <span className="text-2xl w-full">{eventName}</span>
+        <span className="text-2xl w-full">{ticket.name}</span>
         <div className="flex flex-col">
           <span className="text-sm text-red-500 capitalize font-semibold pt-1">
-            {eventPrice} SOL
+            {ticket.price} SOL
           </span>
-          <span className="text-xs text-gray-500 uppercase font-medium ">
-            {eventDate}
+          <span className="text-xs text-gray-500 uppercase font-medium w-16">
+            {ticket.date}
           </span>
         </div>
       </Link>
